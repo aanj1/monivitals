@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #121417;
+  --mid: #2a2f38;
+  --line: #e6e7ea;
+  --paper: #f4f4f2;
+  --rose: #e11d48;
+  --rose-deep: #be123c;
+}
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: var(--ink);
+  font-weight: 500;
+  font-size: 16px;
+  font-family: var(--font-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* thin scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #cfd4e0;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* range slider */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f9a8c9, #e11d48 60%, #5b0a22);
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f9a8c9, #e11d48 60%, #5b0a22);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e11d48;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #e11d48;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+.no-drag {
+  user-select: none;
+}
+
+
+/* ---------- home page ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+.btn:active { transform: translateY(1px); }
+.btn { font-weight: 700; }
+.btn-rose { background: var(--rose); color: #fff; }
+.btn-rose:hover { background: var(--rose-deep); }
+.btn-ink { background: var(--ink); color: #fff; }
+.btn-ink:hover { background: #2a2e36; }
+.btn-sm { height: 40px; padding: 0 18px; font-size: 14px; }
+.btn .arrow { font-size: 15px; line-height: 1; transition: transform 0.15s ease; }
+.btn:hover .arrow { transform: translate(1px, -1px); }
+
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: clamp(16px, 4vw, 56px); align-items: center; }
+.hero-p { font-size: clamp(15px, 1.35vw, 19px); font-weight: 500; line-height: 1.55; max-width: 46ch; }
+.hero-cap { font-size: clamp(13px, 1vw, 15px); font-weight: 500; }
+@media (max-width: 640px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 14px; align-items: start; }
+  .hero-grid .btn { height: 40px; padding: 0 14px; font-size: 13px; }
+}
+.home-h1 {
+  font-size: clamp(30px, 4.6vw, 68px);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+}
+.home-h2 {
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; align-items: start; }
+.photo-col { display: grid; gap: 16px; }
+@media (max-width: 900px) {
+  .photo-grid { display: block; columns: 2; column-gap: 16px; }
+  .photo-col { display: contents; }
+  .photo-grid figure { break-inside: avoid; margin-bottom: 16px; }
+}
+@media (max-width: 560px) { .photo-grid { columns: 1; } }
+
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary { list-style: none; }
+.faq details[open] .plus { transform: rotate(45deg); }
+.plus { transition: transform 0.2s ease; }
+
+.rise { animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1, h2, h3 { font-weight: 700; }
+strong { font-weight: 700; }
