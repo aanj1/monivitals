@@ -1,0 +1,124 @@
+.wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #f4f4f2;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.handStroke {
+  fill: none;
+  stroke: #121417;
+  stroke-width: 3;
+}
+.handFill {
+  fill: #ffffff;
+}
+
+/* 10 s loop: phone lands (0–8%), capture ring fills (15–75%), result (76–92%), reset. */
+
+.phone {
+  animation: mvPhone 10s ease-in-out infinite;
+}
+@keyframes mvPhone {
+  0% { opacity: 0; transform: translateY(-18px); }
+  8% { opacity: 1; transform: translateY(0); }
+  92% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(0); }
+}
+
+.glowWrap {
+  animation: mvGlow 10s ease-in-out infinite;
+}
+@keyframes mvGlow {
+  0%, 12% { opacity: 0; }
+  18% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.glow {
+  fill: rgba(225, 29, 72, 0.16);
+  filter: blur(14px);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mvBeat 0.83s ease-out infinite;
+}
+@keyframes mvBeat {
+  0% { transform: scale(1.06); }
+  35% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+.ring {
+  stroke-dasharray: var(--ring);
+  stroke-dashoffset: var(--ring);
+  animation: mvRing 10s linear infinite;
+}
+@keyframes mvRing {
+  0%, 15% { stroke-dashoffset: var(--ring); }
+  75%, 100% { stroke-dashoffset: 0; }
+}
+
+.hold {
+  fill: #9aa1ab;
+  font-size: 7px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  animation: mvHold 10s steps(1) infinite;
+}
+@keyframes mvHold {
+  0%, 14% { opacity: 0; }
+  15%, 75% { opacity: 1; }
+  76%, 100% { opacity: 0; }
+}
+
+.result {
+  animation: mvResult 10s ease-out infinite;
+}
+@keyframes mvResult {
+  0%, 75% { opacity: 0; }
+  78%, 100% { opacity: 1; }
+}
+.bpm {
+  fill: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.unit {
+  fill: #9aa1ab;
+  font-size: 5.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.flow {
+  animation: mvFlow 0.83s linear infinite;
+}
+@keyframes mvFlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-40px); }
+}
+.trace {
+  fill: none;
+  stroke: #e11d48;
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .phone, .glowWrap, .glow, .ring, .hold, .result, .flow { animation: none; }
+  .phone, .glowWrap, .result { opacity: 1; transform: none; }
+  .ring { stroke-dashoffset: 0; }
+  .hold { opacity: 0; }
+}
