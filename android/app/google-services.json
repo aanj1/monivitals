@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "981916297971",
+    "project_id": "monivitals",
+    "storage_bucket": "monivitals.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981916297971:android:69ba31b1710ce9a0d4e586",
+        "android_client_info": {
+          "package_name": "com.monivitals.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981916297971-14gpcd9i5lmasmtqavnip9grso3h96f6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monivitals.app",
+            "certificate_hash": "43bdd43819ad0f1102f168909eb119f3b675d463"
+          }
+        },
+        {
+          "client_id": "981916297971-hn3u98precljm7l3o0nqr20t57t1bnv5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monivitals.app",
+            "certificate_hash": "ef3f4561ef718c77ab004bc35545673e731b30af"
+          }
+        },
+        {
+          "client_id": "981916297971-9a1g4vkdi0n94mmhctcpm1i5s540hnrq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEi7rSO84cLXoUMaCLKd1SS2l4Ep4N_Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981916297971-9a1g4vkdi0n94mmhctcpm1i5s540hnrq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "981916297971-7setfeotapb8coj48uf4f4tok006l80p.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monivitals.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
