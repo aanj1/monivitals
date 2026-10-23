@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API 31+ backup/transfer rules (defense in depth: android:allowBackup is already false).
+     Health readings and auth tokens must never leave the phone:
+       - file MoniVitals/            all local readings (subjects/sessions/chunks/metrics JSON)
+       - sharedpref monivitals.auth  legacy plaintext Firebase tokens (pre-migration)
+       - sharedpref monivitals.auth.enc  EncryptedSharedPreferences token file (ciphertext is
+         useless without the device Keystore key, which never backs up — exclude it anyway) -->
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="file" path="MoniVitals/" />
+        <exclude domain="sharedpref" path="monivitals.auth.xml" />
+        <exclude domain="sharedpref" path="monivitals.auth.enc.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="file" path="MoniVitals/" />
+        <exclude domain="sharedpref" path="monivitals.auth.xml" />
+        <exclude domain="sharedpref" path="monivitals.auth.enc.xml" />
+    </device-transfer>
+</data-extraction-rules>

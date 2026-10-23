@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API < 31 full-backup rules (defense in depth: android:allowBackup is already false).
+     Mirrors res/xml/data_extraction_rules.xml — see that file for the rationale. -->
+<full-backup-content>
+    <exclude domain="file" path="MoniVitals/" />
+    <exclude domain="sharedpref" path="monivitals.auth.xml" />
+    <exclude domain="sharedpref" path="monivitals.auth.enc.xml" />
+</full-backup-content>
