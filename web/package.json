@@ -2,23 +2,19 @@
   "name": "monivitals",
   "version": "0.1.0",
   "private": true,
-  "description": "MoniVitals — palm pulse estimate for general wellness. Marketing site + web palm scan app.",
+  "description": "MoniVitals, palm pulse estimate for general wellness. Marketing site with the palm scan on the home page.",
   "scripts": {
-    "test": "node scripts/test-palm.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
-    "@mediapipe/tasks-vision": "^1.0.1",
     "d3-geo": "^3.1.1",
-    "dexie": "^4.0.8",
     "next": "^14.2.35",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "topojson-client": "^3.1.0",
-    "zustand": "^4.5.5"
+    "topojson-client": "^3.1.0"
   },
   "devDependencies": {
     "@types/d3-geo": "^3.1.1",

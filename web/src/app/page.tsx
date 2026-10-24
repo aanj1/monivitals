@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import MapExplorer from "@/components/atlas/MapExplorer";
-import PulseAnimation from "@/components/PulseAnimation";
+import HomeScan from "@/components/HomeScan";
+import StartScanButton from "@/components/StartScanButton";
 
 const STEPS = [
   {
@@ -97,9 +98,9 @@ export default function Page() {
               </a>
             ))}
           </nav>
-          <Link href="/palm" className="btn btn-rose btn-sm">
-            Start palm scan <span className="arrow" aria-hidden>↗</span>
-          </Link>
+          <StartScanButton className="btn btn-rose btn-sm">
+            Try palm scan <span className="arrow" aria-hidden>↗</span>
+          </StartScanButton>
         </div>
       </header>
 
@@ -111,23 +112,20 @@ export default function Page() {
               <div className="rise min-w-0">
                 <h1 className="home-h1">Your pulse, anywhere.</h1>
                 <p className="hero-p mt-4 text-[color:var(--mid)] lg:mt-6">
-                  A 30-second heart-rate check on the phone you already carry. No wearable, no
+                  A 60-second heart-rate check on the phone you already carry. No wearable, no
                   account, no face scan. The reading stays on your phone.
                 </p>
                 <div className="mt-6 flex flex-wrap items-center gap-3 lg:mt-8">
-                  <Link href="/palm" className="btn btn-rose">
-                    Start palm scan <span className="arrow" aria-hidden>↗</span>
-                  </Link>
-                  <a href="#how" className="btn btn-ink">
+                  <StartScanButton className="btn btn-rose">
+                    Try palm scan <span className="arrow" aria-hidden>↗</span>
+                  </StartScanButton>
+                  <Link href="/palm" className="btn btn-ink">
                     How it works
-                  </a>
+                  </Link>
                 </div>
                 <p className="mt-4 text-[15px] font-medium text-[color:var(--mid)]">For general wellness only. Not a medical device.</p>
               </div>
-              <div className="rise min-w-0" style={{ animationDelay: "0.1s" }}>
-                <PulseAnimation />
-                <p className="hero-cap mt-3 text-center text-[color:var(--mid)]">Open palm facing the camera. Processed on your device.</p>
-              </div>
+              <HomeScan />
             </div>
           </div>
         </section>
@@ -175,7 +173,7 @@ export default function Page() {
               <h2 className="home-h2 lg:col-span-5">Testimonials</h2>
               <p className="max-w-[52ch] text-[19px] leading-relaxed text-[color:var(--mid)] lg:col-span-7">
                 MoniVitals set up a free screening table at the local farmers market. Neighbors stopped by for a check of
-                their vitals in about a minute, read privately on their own phone. No needles, no cuffs, no sign-up.
+                their vitals in just 60 seconds, read privately on their own phone. No needles, no cuffs, no sign-up.
               </p>
             </div>
             <figure className="relative mt-12 overflow-hidden rounded-[24px] bg-white">
@@ -268,7 +266,7 @@ export default function Page() {
           <div className="mx-auto flex max-w-[1240px] flex-wrap items-center justify-between gap-4 px-5 py-8 text-[15px] font-medium text-[color:var(--mid)] sm:px-8">
             <span className="font-semibold text-[color:var(--ink)]">MoniVitals</span>
             <div className="flex flex-wrap gap-6">
-              <Link href="/palm" className="transition hover:text-[color:var(--ink)]">Palm scan</Link>
+              <Link href="/palm" className="transition hover:text-[color:var(--ink)]">How the scan works</Link>
               <Link href="/map" className="transition hover:text-[color:var(--ink)]">Health atlas</Link>
               <Link href="/support" className="transition hover:text-[color:var(--ink)]">Support</Link>
               <Link href="/privacy" className="transition hover:text-[color:var(--ink)]">Privacy</Link>

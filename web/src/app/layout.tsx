@@ -7,7 +7,7 @@ const manrope = Manrope({ subsets: ["latin"], weight: ["500", "600", "700", "800
 export const metadata: Metadata = {
   title: "MoniVitals, Palm pulse estimate",
   description:
-    "A heart-rate check in under a minute: a guided 30-second palm scan using your phone's camera. An approximate heart-rate estimate for general wellness, processed on your phone.",
+    "A heart-rate check in just 60 seconds: a guided 30-second palm scan using your phone's camera. An approximate heart-rate estimate for general wellness, processed on your phone.",
   icons: {
     icon: [
       { url: "/favicon.png", sizes: "32x32", type: "image/png" },

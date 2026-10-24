@@ -1,23 +1,19 @@
 # MoniVitals — website
 
-Marketing site and palm-pulse web companion for **MoniVitals**. Rest the rear 
-camera and flash flat against your palm for a guided 60-second capture.
-MoniVitals reads tiny color changes with each heartbeat and shows an approximate
-pulse estimate — for general wellness only, not a medical device.
+Marketing site for **MoniVitals**, with the palm scan on the home page. Hold an
+open palm to the camera for a 30-second capture and read an approximate pulse
+estimate, for general wellness only, not a medical device.
 
 ## Pages
 
 | Route      | What it is                                                        |
 | ---------- | ----------------------------------------------------------------- |
-| `/`        | Landing page for palm scanning and the health atlas              |
+| `/`        | Landing page: the palm scan, the health atlas, how it works, FAQ |
 | `/measure` | Compatibility redirect to `/palm`                               |
-| `/palm`    | Guided 60-second palm-pulse capture, with local saving and Review |
+| `/palm`    | How the palm scan works (informational)                          |
 | `/map`     | 2D US cardiovascular atlas — counties, states, and period comparisons |
 | `/support` | Support & FAQ (App Store support URL)                             |
 | `/privacy` | Privacy policy (App Store privacy URL)                            |
-
-The `/palm` app runs entirely in the browser: camera frames are processed in
-memory and discarded; saved readings live in IndexedDB (Dexie) on the device.
 
 The `/map` route restores the original atlas as an SVG choropleth, including
 Alaska and Hawaii insets. It supports three indicators, population filters,
@@ -33,23 +29,21 @@ scale across periods for each indicator. Territories are not shown.
 
 ## Palm scan
 
-Open `/palm`; existing `/measure` links redirect there. Palm scan is the only
-capture option, alongside Review and Settings. This follows the contact-palm
-flow in the local VitaPalm/PulsePal iOS app: rear camera and flash flat against the
-palm, 1.5 seconds of settled contact, then 60 seconds of capture. Contact loss or
-a frame gap resets the timer. A completed reading can be saved to Review and
-exported with `placement: "palm"`; older readings default to fingertip.
+The scan lives in the hero of the home page (`src/components/HomeScan.tsx`).
+The pulse animation fills the square until the visitor taps Try palm scan; the
+header and hero buttons trigger the same thing through a window event. The
+browser asks for camera permission, the live feed replaces the animation for a
+30-second capture with a countdown ring, then the feed fades, the animation
+returns, and the reading appears below: heart rate, breathing rate, blood
+oxygen and heart rate variability. The feed is never recorded or uploaded, and
+the camera is released as soon as the capture ends or is cancelled.
 
-The browser version requires HTTPS (or localhost) and a camera track with a
-confirmed controllable torch. Unlike iOS, the web torch API does not provide the
-native half-power setting. Unsupported cameras get an explanation to use a phone
-browser with rear-camera flash control. Frames never leave the browser and are never stored. Only a
-user-saved pulse trace and summary are written to IndexedDB.
+The reading shown today is a placeholder drawn from healthy resting ranges; the
+camera signal is not yet analysed in the browser. The earlier in-browser
+estimator (MediaPipe hand tracking, PPG extraction, IndexedDB saving) was
+removed in October 2026 and is in git history if it is needed again.
 
-The web estimator resamples camera timestamps and checks pulse amplitude and
-periodicity before displaying an estimate. This is an experimental wellness
-feature, not clinical validation or full parity with the native signal pipeline.
-Run `npm test` for synthetic signal, capture-state, and camera-lifecycle checks.
+`/palm` is an explanation page and links back to the scan.
 
 ## Community photos
 
