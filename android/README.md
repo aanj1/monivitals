@@ -3,7 +3,7 @@
 A Jetpack Compose (Kotlin, minSdk 26) companion app for the experimental ECG / BioZ / PPG
 wearable. It is a **line-for-line port of the [iOS app](../ios)** and mirrors the
 [web app](../web); all three share the algorithm / protocol / export specifications in
-[`../docs`](../docs).
+conventions listed under [Parity](#parity-with-the-ios--web-apps).
 
 > ⚠️ **MoniVitals is a research / science-fair / educational tool, NOT a medical device.**
 > It must not be used for diagnosis or any clinical decision. Heart rate, SpO₂, pulse
@@ -51,7 +51,7 @@ The layers match the iOS app and are kept cleanly separated (package `com.monivi
 ```
 ble/     Protocol (UUIDs / opcodes / rate tables / sentinels), Packets, Parsers,
          Encoders — little-endian via a hand-rolled reader/writer, K derived from length
-dsp/     DSPConstants (== docs/DSP.md), Filters (Biquad / derivative / moving avg),
+dsp/     DSPConstants, Filters (Biquad / derivative / moving avg),
          RollingStats, RPeakDetector (Pan–Tompkins + back-search), PpgFootDetector
          (intersecting tangents), PatEstimator, HeartRateEstimator, Spo2Estimator,
          BioZ (ContactMotion + gateEcg), Calibration (OLS / Pearson / fit / predict),
@@ -61,7 +61,7 @@ source/  Timebase (uint32 wrap extender + SeqTracker + clock offset), DataSource
          synthetic ECG/PPG/BioZ + exact PAT/HR truth), MockSource (executor-driven),
          BleSource (BluetoothGatt wrapper with a serial op queue)
 model/   Models (@Serializable data classes), Store (dependency-light local JSON
-         persistence), Recorder (chunked flush pipeline), CSVExport (docs/CSV_FORMAT.md
+         persistence), Recorder (chunked flush pipeline), CSVExport (CSV
          bundle → shareable .zip)
 ui/      AppViewModel (state holder), WaveBuffers (RingBuffer), WaveformStrip (Compose
          Canvas + frame tick), UIHelpers, Connect / Dashboard / Recorder / Calibration /
@@ -80,13 +80,12 @@ state. A 250 ms coroutine tick snapshots the engine and publishes throttled metr
 
 ### Parity with the iOS / web apps
 
-- BLE UUIDs, opcodes, packet layouts, rate tables, and sentinels come from
-  [`docs/BLE_PROTOCOL.md`](../docs/BLE_PROTOCOL.md) and match `ios/MoniVitals/BLE` and
-  `web/src/ble`.
-- DSP constants and algorithms come from [`docs/DSP.md`](../docs/DSP.md); the Kotlin DSP is
+- BLE UUIDs, characteristics and commands follow the GATT table in
+  [`firmware/README.md`](../firmware/README.md) and match `ios/MoniVitals/Source`.
+- DSP constants live in `dsp/DSPConstants.kt`; the Kotlin DSP is
   a direct port of the Swift/TypeScript DSP (`Double` arithmetic matches IEEE-754, so
   synthetic-signal detector outputs are comparable).
-- CSV export matches [`docs/CSV_FORMAT.md`](../docs/CSV_FORMAT.md): fixed column order,
+- CSV export matches `ios/MoniVitals/Model/CSVExport.swift`: fixed column order,
   RFC-4180 escaping, blank-for-invalid cells, `z0` forward-fill, JS-style number
   formatting.
 

@@ -2,7 +2,7 @@
 
 A SwiftUI (iOS 16+) + CoreBluetooth companion app for an experimental ECG / BioZ / PPG
 wearable. It mirrors the **web app** (`../web`) and shares the algorithm / protocol /
-export specifications in [`../docs`](../docs).
+export conventions listed under [Shared spec](#shared-spec--parity-with-the-web-app).
 
 > ⚠️ **MoniVitals is a research / science-fair / educational tool, NOT a medical device.**
 > It must not be used for diagnosis or any clinical decision. Heart rate, SpO₂, pulse
@@ -52,7 +52,7 @@ MoniVitals/
   App/        MoniVitalsApp (@main), RootView (TabView), OnboardingView (first-run gate)
   BLE/        Protocol (UUIDs / opcodes / rate tables / sentinels), Packets, Parsers,
               Encoders — little-endian, K derived from payload length
-  DSP/        DSPConstants (== docs/DSP.md), Filters (Biquad / derivative / moving avg),
+  DSP/        DSPConstants, Filters (Biquad / derivative / moving avg),
               RollingStats, RPeakDetector (Pan–Tompkins + back-search), PpgFootDetector
               (intersecting tangents), PatEstimator, HeartRateEstimator, Spo2Estimator,
               BioZ (ContactMotion + gateEcg), Calibration (OLS / Pearson / fit / predict),
@@ -62,7 +62,7 @@ MoniVitals/
               DataSource (protocol + Combine event hub + ConnectionState),
               MockSource (timer-driven), BleSource (CBCentralManager wrapper)
   Model/      Models (Codable structs), Store (dependency-free local JSON persistence +
-              Recorder pipeline), CSVExport (docs/CSV_FORMAT.md bundle → temp folder)
+              Recorder pipeline), CSVExport (CSV bundle → temp folder)
   Views/      AppModel (ObservableObject store), RingBuffer (WaveBuffer), WaveformStrip
               (Canvas + TimelineView), Connect / Dashboard / Recorder / Calibration /
               Gating / Review / Settings, UIHelpers
@@ -82,12 +82,12 @@ Review waveforms), never the 256 Hz live strips.
 
 ### Shared spec / parity with the web app
 
-- BLE UUIDs, opcodes, packet layouts, rate tables, and sentinels come from
-  [`docs/BLE_PROTOCOL.md`](../docs/BLE_PROTOCOL.md) and match `web/src/ble`.
-- DSP constants and algorithms come from [`docs/DSP.md`](../docs/DSP.md); the Swift DSP is
-  a line-for-line port of `web/src/dsp` (`Double` arithmetic matches JavaScript IEEE-754,
+- BLE UUIDs, characteristics and commands follow the GATT table in
+  [`firmware/README.md`](../firmware/README.md) and are implemented in `MoniVitals/Source`.
+- DSP constants live in `MoniVitals/DSP/DSPConstants.swift`; the Swift DSP is
+  the reference implementation the Android port follows (`Double` arithmetic matches IEEE-754,
   so the synthetic signal and detector outputs are comparable).
-- The CSV export matches [`docs/CSV_FORMAT.md`](../docs/CSV_FORMAT.md) byte-for-byte
+- The CSV export matches `android/.../model/CSVExport.kt` byte-for-byte
   (fixed column order, RFC-4180 escaping, blank-for-invalid, `z0` forward-fill).
 
 ### Deviations from the web app
